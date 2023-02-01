@@ -23,6 +23,29 @@ test("test peek: newly created list should peek null", () => {
     expect(createQueue().peek()).toBeNull()
 })
 
+test("test clear", () => {
+    const queue = createQueue()
+    for (let i =0;i<11;i++)
+        queue.enqueue(i)
+    queue.clear()
+    expect(queue.size()).toBe(0)
+})
+
+test("test dequeue: add 2 and dequeue 1", () => {
+    const queue = createQueue()
+    queue.enqueue(2)
+    queue.enqueue(9)
+
+    expect(queue.dequeue()).toBe(2)
+    expect(queue.size()).toBe(1)
+})
+
+test("test dequeue empty", () => {
+    const queue = createQueue() 
+    expect(queue.isEmpty()).toBeTruthy()
+    expect(queue.dequeue()).toBeNull()
+})
+
 test("test peek: queue with 2 element should peek the one that was most recently added", () => {
     const queue = createQueue()
     queue.enqueue(2)
@@ -51,5 +74,21 @@ describe("test size: ", ()=> {
         for (let i =0;i<11;i++)
             queue.enqueue(i)
         expect(queue.size()).toBe(11)
+    })
+
+    test("100 entries", ()=>{
+        const queue = createQueue()
+        for (let i =0;i<100;i++)
+            queue.enqueue(i)
+        expect(queue.size()).toBe(100)
+    })
+
+    test("0 entries", ()=>{
+        const queue = createQueue()
+        for (let i =0;i<100;i++)
+            queue.enqueue(i)
+        for (let i =0;i<100;i++)
+            queue.dequeue()
+        expect(queue.size()).toBe(0)
     })
 })
